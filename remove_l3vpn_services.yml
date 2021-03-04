@@ -1,0 +1,11 @@
+---
+- hosts: pe1,pe3
+  gather_facts: false
+  connection: local
+
+  tasks:
+    - name: Build config template files local
+      template: src=./templates/remove-services.j2 dest=./final_configs/remove-services-{{ inventory_hostname }}.cfg
+    # - name: Remove L3VPN Services
+    #   cisco.ios.ios_config:
+    #     src: 'templates/remove-services.j2'

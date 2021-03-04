@@ -1,0 +1,48 @@
+---
+# User defined VRF state of the router
+# VRFs used in the Add section should
+# definded here first
+# vrf name / route-target
+vrfs:
+  green: "65000:31"
+  red: "65000:32"
+
+# User defined Interface state of the rotuer
+# Interfaces used in Add section should be 
+# defined here first
+interfaces:
+  fa0/1.400:
+    description: green interface
+    vlan: 400
+    vrf: green
+    ipAddress: 172.25.130.1
+    networkMask: 255.255.255.0
+  fa0/1.250:
+    description: red interface
+    vlan: 250
+    vrf: red
+    ipAddress: 172.25.131.1
+    networkMask: 255.255.255.0
+
+# Adds L3VPN services to the network
+# Service options include all and interface
+# All creates vrf, interface, and BGP instance
+# Interface is useful if the vrf is already created
+# and BGP is already running for it.
+add:
+  - service: all
+    name: green
+    interface:
+      - fa0/1.400
+  - service: all
+    name: red
+    interface:
+      - fa0/1.250
+
+# Removes services from the network
+# Used the same way as add
+# remove:
+#   - service: all
+#     name: red
+#     interface:
+#       - fa0/1.250

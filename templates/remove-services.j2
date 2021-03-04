@@ -1,0 +1,19 @@
+{% for service in remove %}
+{% if "interface" in service.service %}
+{% for interface in service.interface %}
+no interface {{ interface }}
+!
+{% endfor %}
+{% else %}
+router bgp {{ bgpAS }}
+ no address-family ipv4 vrf {{ service.name }}
+exit
+!
+{% for interface in service.interface %}
+no interface {{ interface }}
+!
+{% endfor %}
+no vrf definition {{ service.name }}
+!
+{% endif %}
+{% endfor %}

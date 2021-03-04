@@ -1,0 +1,9 @@
+---
+bgpAS: 65000
+customerInfo:
+  green:
+    rt: "100:1"
+  blue:
+    rt: "100:2"
+  red:
+    rt: "100:3"

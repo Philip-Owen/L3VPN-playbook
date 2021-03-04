@@ -1,0 +1,7 @@
+router bgp {{ bgpAS }}
+{% for addVrf in add %}
+ address-family ipv4 vrf {{ addVrf.name }}
+  redistribute connected
+ exit-address-family
+{% endfor %}
+!

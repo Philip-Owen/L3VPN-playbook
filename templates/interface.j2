@@ -1,0 +1,17 @@
+{% for addVrf in add %}
+{% for i in addVrf.interface %}
+{% if interfaces[i].vlan is defined %}
+interface {{ i }}
+ description {{ interfaces[i].description }}
+ vrf forwarding {{ interfaces[i].vrf }}
+ encapsulation dot1q {{ interfaces[i].vlan }}
+ ip address {{ interfaces[i].ipAddress }} {{ interfaces[i].networkMask }}
+{% else %}
+interface {{ i }}
+ description {{ interfaces[i].description }}
+ vrf forwarding {{ interfaces[i].vrf }}
+ ip address {{ interfaces[i].ipAddress }} {{ interfaces[i].networkMask }}
+{% endif %}
+!
+{% endfor %}
+{% endfor %}

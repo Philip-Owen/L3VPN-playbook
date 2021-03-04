@@ -1,0 +1,14 @@
+!
+{% for vrfToAdd in add %}
+{% if not 'interface' in vrfToAdd.service %}
+vrf definition {{ vrfToAdd.name }}
+ rd {{ vrfs[vrfToAdd.name] }}
+ !
+ address-family ipv4
+  route-target export {{ customerInfo[vrfToAdd.name].rt}}
+  route-target import {{ customerInfo[vrfToAdd.name].rt}}
+ exit-address-family
+!
+{% else %}
+{% endif %}
+{% endfor %}

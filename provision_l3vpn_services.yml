@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: false
+  connection: local
+
+  tasks:
+    - name: Build config template files local
+      template: src=./templates/provision-l3vpn.j2 dest=./final_configs/add-services-{{ inventory_hostname }}.cfg
+    # - name: Provision L3VPN Services
+    #   cisco.ios.ios_config:
+    #     src: 'templates/provision-l3vpn.j2'
